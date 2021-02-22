@@ -4,7 +4,7 @@
 
 # Azure Deploy
 
-[![Deploy to Azure](https://taskplaner.azurewebsites.net/)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://taskplaner.azurewebsites.net/)
 
 # Getting Started with Create React App
 
