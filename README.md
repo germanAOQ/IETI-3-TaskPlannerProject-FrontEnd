@@ -1,6 +1,10 @@
-#Heroku Deploy
+# Heroku Deploy
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](http:///young-waters-93438.herokuapp.com)
+
+# Azure Deploy
+
+[![Deploy to Azure](https://taskplaner.azurewebsites.net/)
 
 # Getting Started with Create React App
 
