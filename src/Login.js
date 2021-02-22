@@ -12,7 +12,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import Button from '@material-ui/core/Button';
 //import Link from '@material-ui/core/Link';
 import DefaultPage from './DefaultPage'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link, useLocation} from 'react-router-dom'
 import { useHistory } from "react-router-dom";
 
 
@@ -40,7 +40,8 @@ export class Login extends React.Component{
 
 const DefaultPageView = () => (
 	<DefaultPage />
-);
+	);
+	
 
 function CenteredGrid(){	
 	const classes = useStyles();
@@ -48,10 +49,11 @@ function CenteredGrid(){
 	const [username, setUsername] = useState(0);
 	const [password, setPassword] = useState(0);
 	
+	
 	function handleClick(){
 		let isLogin = localStorage.getItem(username) === password;
 		if(isLogin){
-			historia.push("/inicio");
+			historia.push("/inicio?username="+username);
 		}else{
 			alert("Usuario no registrado, oprima el botón Create Account");
 		}

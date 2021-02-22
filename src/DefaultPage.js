@@ -26,7 +26,12 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import {Login} from "./Login"
 import { useHistory } from "react-router-dom";
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link, useLocation} from 'react-router-dom'
+import CardHeader from '@material-ui/core/CardHeader';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+
+
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -53,20 +58,37 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
+	align: "left",
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
+  avatar: {
+    backgroundColor: "red",
+	alignSelf: "center",
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  }
 }));
 
-function DefaultPage(){
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+function DefaultPage(props){
 	const classes = useStyles();
 	const historia = useHistory();
 	
 	const LoginView = () => (
 		<Login />	
 	);
+	
+	let query = useQuery();
+
 	
 	const [state, setState] = React.useState({
     top: false,
@@ -98,7 +120,7 @@ function DefaultPage(){
 				  <Avatar />
 				</ListItemAvatar>
 				<ListItemText
-				  primary="Nombre del usuario"
+				  primary={query.get("username")}
 				  secondary={
 					<React.Fragment>
 					  <Typography
@@ -107,7 +129,7 @@ function DefaultPage(){
 						className={classes.inline}
 						color="textPrimary"
 					  >
-						Correo electrónico
+					  {query.get("username")}@mail.escuelaing.edu.co
 					  </Typography>
 					</React.Fragment>
 				  }
@@ -139,6 +161,8 @@ function DefaultPage(){
 		historia.push("/");
 	}
 	
+	
+	
 	return (
 		<React.Fragment>
 				<CssBaseline />
@@ -156,127 +180,97 @@ function DefaultPage(){
 					<div className={useStyles().heroContent}>
 						<Container>
 							<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-							  Contactos          
+							  Tareas          
 							</Typography>						
 						</Container>
 					</div>
 						<Container className={useStyles().cardGrid} maxWidth="md">
 							<Grid container spacing={4}>
 								<Grid item key="1" xs={12} sm={6} md={4}>
-									<Card className={useStyles().card}>
-										<CardMedia
-											className={useStyles().cardMedia}
-											image = ""
-											title ="Image title"
+									<Card className={useStyles().card} variant="outlined">
+										<CardHeader
+											avatar={
+												<Avatar aria-label="recipe" className={useStyles().avatar}>
+													R
+												 </Avatar>
+											}
+										
 										/>
 										<CardContent className={useStyles().cardContent}>
-											<Typography gutterBottom variant="h5" component="h2">
-												User 1
+											<Typography variant="h5" component="h2">
+												Descripción
+											</Typography>
+											<Typography variant="body2" component="p">
+												<br></br>
+												status - dueDate
+											</Typography>
+												<br></br>
+											<Typography variant="h5" component="h2">
+												Responsable
 											</Typography>
 										</CardContent>
-										<CardActions>
-											<Button size="small" color="primary">
-												View
-											</Button>
-										</CardActions>
 									</Card>
 								</Grid>
-								<Grid item key="2" xs={12} sm={6} md={4}>
-									<Card className={useStyles().card}>
-										<CardMedia
-											className={useStyles().cardMedia}
-											image = ""
-											title ="Image title"
+								<Grid item key="1" xs={12} sm={6} md={4}>
+									<Card className={useStyles().card} variant="outlined">
+										<CardHeader
+											avatar={
+												<Avatar aria-label="recipe" className={useStyles().avatar}>
+													R
+												 </Avatar>
+											}
+										
 										/>
 										<CardContent className={useStyles().cardContent}>
-											<Typography gutterBottom variant="h5" component="h2">
-												User 2
+											<Typography variant="h5" component="h2">
+												Descripción
+											</Typography>
+											<Typography variant="body2" component="p">
+												<br></br>
+												status - dueDate
+											</Typography>
+												<br></br>
+											<Typography variant="h5" component="h2">
+												Responsable
 											</Typography>
 										</CardContent>
-										<CardActions>
-											<Button size="small" color="primary">
-												View
-											</Button>
-										</CardActions>
 									</Card>
 								</Grid>
-								<Grid item key="3" xs={12} sm={6} md={4}>
-									<Card className={useStyles().card}>
-										<CardMedia
-											className={useStyles().cardMedia}
-											image = ""
-											title ="Image title"
+								<Grid item key="1" xs={12} sm={6} md={4}>
+									<Card className={useStyles().card} variant="outlined">
+										<CardHeader
+											avatar={
+												<Avatar aria-label="recipe" className={useStyles().avatar}>
+													R
+												 </Avatar>
+											}
+										
 										/>
 										<CardContent className={useStyles().cardContent}>
-											<Typography gutterBottom variant="h5" component="h2">
-												User 3
+											<Typography variant="h5" component="h2">
+												Descripción
+											</Typography>
+											<Typography variant="body2" component="p">
+												<br></br>
+												status - dueDate
+											</Typography>
+												<br></br>
+											<Typography variant="h5" component="h2">
+												Responsable
 											</Typography>
 										</CardContent>
-										<CardActions>
-											<Button size="small" color="primary">
-												View
-											</Button>
-										</CardActions>
 									</Card>
 								</Grid>
-								<Grid item key="4" xs={12} sm={6} md={4}>
-									<Card className={useStyles().card}>
-										<CardMedia
-											className={useStyles().cardMedia}
-											image = ""
-											title ="Image title"
-										/>
-										<CardContent className={useStyles().cardContent}>
-											<Typography gutterBottom variant="h5" component="h2">
-												User 4
-											</Typography>
-										</CardContent>
-										<CardActions>
-											<Button size="small" color="primary">
-												View
-											</Button>
-										</CardActions>
-									</Card>
-								</Grid>
-								<Grid item key="5" xs={12} sm={6} md={4}>
-									<Card className={useStyles().card}>
-										<CardMedia
-											className={useStyles().cardMedia}
-											image = ""
-											title ="Image title"
-										/>
-										<CardContent className={useStyles().cardContent}>
-											<Typography gutterBottom variant="h5" component="h2">
-												User 5
-											</Typography>
-										</CardContent>
-										<CardActions>
-											<Button size="small" color="primary">
-												View
-											</Button>
-										</CardActions>
-									</Card>
-								</Grid>
-								<Grid item key="6" xs={12} sm={6} md={4}>
-									<Card className={useStyles().card}>
-										<CardMedia
-											className={useStyles().cardMedia}
-											image = ""
-											title ="Image title"
-										/>
-										<CardContent className={useStyles().cardContent}>
-											<Typography gutterBottom variant="h5" component="h2">
-												User 6
-											</Typography>
-										</CardContent>
-										<CardActions>
-											<Button size="small" color="primary">
-												View
-											</Button>
-										</CardActions>
-									</Card>
-								</Grid>
-
+							</Grid>
+							<br></br>
+							<Grid
+								container
+								direction="column"
+								justify="flex-end"
+								alignItems="flex-end">
+								<Fab color="primary" aria-label="add" className="useStyles().fab">
+								  <AddIcon />
+								</Fab>
 							</Grid>
 						</Container>
 			</React.Fragment>
