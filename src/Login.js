@@ -147,10 +147,7 @@ function CenteredGrid(){
 						<Grid item xs={12}>
 							<Router>
 								<div>
-									<Link
-										 onClick = {makeRegistro}
-										 
-										>
+									<Link onClick = {makeRegistro}>
 										  <h1>Create Account</h1>
 										</Link>
 									
