@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -10,8 +10,10 @@ import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-
+//import Link from '@material-ui/core/Link';
+import DefaultPage from './DefaultPage'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 	}));	
 
 
+
 export class Login extends React.Component{
 	
 	render(){
@@ -35,9 +38,38 @@ export class Login extends React.Component{
 	}
 }
 
+const DefaultPageView = () => (
+	<DefaultPage />
+);
+
 function CenteredGrid(){	
-	
 	const classes = useStyles();
+	const historia = useHistory();
+	const [username, setUsername] = useState(0);
+	const [password, setPassword] = useState(0);
+	
+	function handleClick(){
+		let isLogin = localStorage.getItem(username) === password;
+		if(isLogin){
+			historia.push("/inicio");
+		}else{
+			alert("Usuario no registrado, oprima el botón Create Account");
+		}
+	}
+	
+	function handleTextChange(e){
+		setUsername(e.target.value);
+	}
+
+	function handlePasswordChange(e){
+		setPassword(e.target.value);
+	}
+	
+	function makeRegistro(){
+		localStorage.setItem(username,password);
+		alert("Usuario registrado satisfactoriamente");
+	}
+	
 		return(
 			  <Container maxWidth="sm">
 				
@@ -66,6 +98,7 @@ function CenteredGrid(){
 							  //label="Label"
 							  style={{ margin: 8 }}
 							  placeholder="Username"
+							  onChange={handleTextChange}
 							  //helperText="Full width!"
 							  fullWidth
 							  margin="normal"
@@ -82,6 +115,7 @@ function CenteredGrid(){
 							  type="password"
 							  style={{ margin: 8 }}
 							  placeholder="Password"
+							  onChange={handlePasswordChange}
 							  //helperText="Full width!"
 							  fullWidth
 							  margin="normal"
@@ -99,18 +133,27 @@ function CenteredGrid(){
 					  alignItems="center"
 					  spacing={3}>
 						<Grid item xs={12}>
-							<Button variant="contained" color="white" style={{width:550}}>
-							  Login
-							</Button>
+							<Router>
+									<div>
+										<Button variant="contained" color="white" style={{width:550}} to="/inicio" onClick={handleClick}>
+										  Login
+										</Button>
+										<Route path="/inicio" component={DefaultPageView} />
+									</div>
+							</Router>
 						</Grid>
 						<Grid item xs={12}>
-							<Link
-								 component="button"
-								 variant="body2"
-
-								>
-								  <h1>Create Account</h1>
-								</Link>
+							<Router>
+								<div>
+									<Link
+										 onClick = {makeRegistro}
+										 
+										>
+										  <h1>Create Account</h1>
+										</Link>
+									
+								</div>
+							</Router>
 						</Grid>
 					</Grid>
 					</div>
